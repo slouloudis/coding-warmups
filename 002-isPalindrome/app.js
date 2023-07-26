@@ -7,6 +7,7 @@
 let str = `kayak`
 let str2 = `Yo, Banana Boy!`
 let str3 = `palindrome`
+let str4 = `Hello a olleH`
 
 function isPalindrome(s) {
   //
@@ -33,6 +34,8 @@ function isPalindrome(s) {
 console.log(isPalindrome(str))
 console.log(isPalindrome(str2))
 console.log(isPalindrome(str3))
+
+
 
 // /: The forward slashes indicate the beginning and end of the regular expression.
 
