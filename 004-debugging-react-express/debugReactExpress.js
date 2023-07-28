@@ -1,17 +1,20 @@
 // 
 // Error 1. 
-import React from 'react'; // didn't import useState
+import React, {useState} from 'react'; 
 
-const Counter = (name) => { // didn't destrucutre name
-  const [count, setcount] = useState(); // lowercase c. useState is not given a defualt value
+export default const Counter = ({name}) => { 
+  const [count, setCount] = useState(0); 
 
   const increment = () => {
-    count++; // need to do count + 1 (and need to useSetCount)
+    setCount(count + 1)
   };
 
   return (
+    <div>
+      <p>Welcome {name}</p>
       <p>Count:{count}</p>
-      <button onClick={increment}>Increment</button> // jsx expressions must have one parent element.
+      <button onClick={increment}>Increment</button>
+    </div>
   );
 };
 
@@ -24,33 +27,40 @@ const Counter = (name) => { // didn't destrucutre name
 
 import React from 'react';
 
-function UserStatus ({isLoggedIn}) { // wrong on many different levels. we're using props elsewhere
-  const isLoggedIn = props.isLoggedIn;
+export function UserStatus ({isLoggedIn , username}) { 
 
   return (
-    <div class='welcome-card'> {/*className instead of class*/}
-      {/* missing s on props */}
-      {isLoggedIn && <p>Welcome, {prop.username} </p>} 
-      {/* this is kinda weird to do, encourge for ternary */}
-      {isLoggedIn || <p>Please log in</p>} // check if not logged in {/* this is not a real comment lol*/}
+    <div className='welcome-card'> 
+      {isLoggedIn ? <p>Welcome, {username} </p> : <p>Please log in</p>} 
     </div>
   )
 }
 
 // in parent
 
-<UserStatus true={!isLoggedIn} />
+<UserStatus isLoggedIn={true} username={'something'} />
 
 
-// Error 3 // remind students they can look up axios docs?
+// Error 3. This is a mean one sorry. You shouldn't need to google anything, but there are some new things here. Ignore them :P
 
+import React, {useState} from 'react'
 const axios = require('axios'); 
+const [email, setemail] = useState(' ')
+const [password, setpassword] = useState(second)
 
-const data = {
-  title: 'This is some data',
-  content: 'this is some more data'
-}
+// some other event handlers and things for a sign up form 
 
-function createUserInfo() { // the function needs to have async infront of it. 
-  await axios.post('https://api.example.com/userInfo', data)
+async function createUserInfo() { 
+  await axios.post('https://api.example.com/userInfo', JSON.stringify({
+    email,
+    password,
+  }), {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then((res)) => {
+    console.log(res.status)
+    alert('Sign up successful!')
+  }
 }
