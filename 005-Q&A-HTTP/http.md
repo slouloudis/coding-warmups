@@ -17,9 +17,48 @@ SQL vs noSQL, graph, (relational)
 
 3. When speaking about databases, what's the difference between a 'document' and a 'table'? 
 
+```
+To begin with, a document database stores entities as documents – meaning JSON documents, and this is very different to the way relational databases store data as rows in a table.
+
+Columns vs. Properties
+While rows in the relational world are made of up columns, documents contain properties.
+
+In the relational world, every table has a schema that defines the columns and data types that every row in the table must conform to. In contrast, a document database has no defined schema, and every document can be structured differently.
+```
+
 4. What is a cluster?
 
+```
+Atlas-managed MongoDB deployments, or “clusters,” can be either a replica set or a sharded cluster.
+
+replica set: a cluster of MongoDB servers that implements replication and automated failover. (Failover is a method of protecting computer systems from failure, in which standby equipment automatically takes over when the main system fails.)
+
+– replication: a feature allowing multiple database servers to share the same data, thereby ensuring redundancy and facilitating load balancing. (Redundancy is a system design in which a component is duplicated so if it fails there will be a backup.)
+
+sharded cluster: the set of nodes comprising a sharded MongoDB deployment. A sharded cluster consists of config servers, shards, and one or more mongos routing processes.
+
+– sharding: a method for distributing data across multiple machines.
+
+A sharded cluster consists of ten servers: one server for the mongos [interface between the client applications and the sharded cluster] and three servers each for the first replica set, the second replica set, and the config server replica set
+
+– shard: a single mongod instance or replica set that stores some portion of a sharded cluster’s total data set. In production, all shards should be replica sets.
+```
+
 5. What are the main HTTP methods? What do they do?
+
+```
+GET
+The GET method is used to retrieve information from the given server using a given URI. Requests using GET should only retrieve data and should have no other effect on the data
+
+POST
+A POST request is used to send data to the server, for example, customer information, file upload, etc. using HTML forms.
+
+PUT
+Replaces all current representations of the target resource with the uploaded content.
+
+DELETE
+Removes all current representations of the target resource given by a URI.
+```
 
 6. What is REST? What does it stand for? How is it related to API's?
 
@@ -40,6 +79,22 @@ Delete - DELETE
 
 8. What is the different between 'PUT' and 'PATCH'. What does idempotent mean? 
 
+Idempotent :
+
+```
+Idempotent is an adjective to describe a process that gives you the same result no matter how many times you run it.
+
+For a mathematical example, adding 1 changes the results, but multiplying by 1 is idempotent. When you add 1 to a number and then add 1 again, you get different results. If you multiply a number by 1 and multiply by 1 again, you do get the same result.
+
+A more real-world example of idempotency is the process of saving a file in a word processor. Given the same inputs (i.e. the same document contents), clicking "Save" one time will leave your system in the exact same state as clicking "Save" five times in a row.
+
+A non-idempotent version of the "Save" button might do something like "Append the paragraph I just wrote to the end of the file". Doing that five times in a row will not leave you in the same state as doing it one time; your most recent paragraph would have duplicates.
+
+REST organizes a web application into "resources" (like a Twitter user, or a Flickr image) and then uses the HTTP verbs of POST, PUT, GET, and DELETE to create, update, read, and delete those resources.
+
+Idempotence plays an important role in REST. If you GET a representation of a REST resource (eg, GET a jpeg image from Flickr), and the operation fails, you can just repeat the GET again and again until the operation succeeds. To the web service, it doesn't matter how many times the image is gotten. Likewise, if you use a RESTful web service to update your Twitter account information, you can PUT the new information as many times as it takes in order to get confirmation from the web service. PUT-ing it a thousand times is the same as PUT-ing it once. Similarly DELETE-ing a REST resource a thousand times is the same as deleting it once. Idempotence thus makes it a lot easier to construct a web service that's resilient to communication errors.
+
+```
 ```
 What is POST?
 Create in CRUD
